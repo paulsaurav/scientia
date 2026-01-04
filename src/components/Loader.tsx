@@ -47,8 +47,7 @@ const Loader = ({ onComplete }: LoaderProps) => {
                 className="text-7xl md:text-9xl lg:text-[12rem] font-black italic text-transparent"
                 style={{
                   WebkitTextStroke: '2px #22d3ee',
-                  textStroke: '2px #22d3ee',
-                }}
+                } as React.CSSProperties}
               >
                 SCIENTIA 6
               </span>

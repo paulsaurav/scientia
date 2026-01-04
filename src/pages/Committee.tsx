@@ -15,7 +15,7 @@ interface CommitteeMember {
   const sectionsRef = useRef<(HTMLElement | null)[]>([])
 
   // Committee data
-  const committeeData = {
+  const committeeData: Record<string, CommitteeMember[]> = {
     'Patron-in-Chief': [
       { name: 'Prof. Rajive Mohan Pant', role: 'Vice Chancellor, Assam University', image: '/team/vc.jpg' }
     ],
@@ -51,7 +51,7 @@ interface CommitteeMember {
       }
 
       // Animate sections on scroll
-      sectionsRef.current.forEach((section, index) => {
+      sectionsRef.current.forEach((section) => {
         if (section) {
           ScrollTrigger.create({
             trigger: section,
@@ -357,7 +357,7 @@ interface CommitteeMember {
   }
 
   // Member card component
-  const MemberCard = ({ member, index }: { member: CommitteeMember; index: number }) => {
+  const MemberCard = ({ member }: { member: CommitteeMember }) => {
     return (
       <div className="relative w-full">
         <CircuitFrame className="p-4 md:p-6 min-h-[280px] md:min-h-[300px] flex flex-col">
@@ -605,7 +605,7 @@ interface CommitteeMember {
           {/* Members Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {committeeData['Core Team'].map((member, index) => (
-              <MemberCard key={index} member={member} index={index} />
+              <MemberCard key={index} member={member} />
             ))}
           </div>
         </section>
