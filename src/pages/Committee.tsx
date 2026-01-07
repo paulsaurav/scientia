@@ -23,13 +23,29 @@ interface CommitteeMember {
       { name: 'Prof. Prodipto Das', role: 'Proctor and HoD, Computer Science, Assam University, Silchar', image: '/team/pd-sir.jpg' }
     ],
     'Chairperson': [
-      { name: 'Dr. Example Name', role: 'Chairperson, SCIENTIA 6' }
+      { name: 'Prof. (Dr.) Pranab Behari Mazumder', role: 'Professor and Head, Department of Biotechnology', image: '/team/pranab-sir.png' }
     ],
-    'Core Team': [
-      { name: 'Member Name 1', role: 'Core Team Member' },
-      { name: 'Member Name 2', role: 'Core Team Member' },
-      { name: 'Member Name 3', role: 'Core Team Member' },
-      { name: 'Member Name 4', role: 'Core Team Member' }
+    'President': [
+      { name: 'Nirmal Barman', role: 'PhD Scholar, Department of Physics', image: '/team/nirmal.jpeg' }
+    ],
+    'Vice-President (Male)': [
+      { name: 'Abhideep Roy', role: 'PhD Scholar, Department of Life Science & Bioinformatics', image: '/team/abhideep.png' }
+    ],
+    'Vice-President (Female)': [
+      { name: 'Arundhati Paul Chowdhury', role: 'PhD Scholar, Department of Ecology & Environmental Science', image: '/team/arundhati.jpeg' }
+    ],
+    'General Secretary': [
+      { name: 'Saurav Paul', role: 'PhD Scholar, Department of Computer Science', image: '/team/saurav.jpg' }
+    ],
+    'Joint Secretaries': [
+      { name: 'Shivam Nath', role: 'M. Pharm, Department of Pharmaceutical Sciences' },
+      { name: 'Mishmi Roy', role: 'PhD Scholar, Department of Chemistry', image: '/team/mishmi.jpeg' },
+      { name: 'Bishal Nath', role: 'M. Sc., Department of Ecology & Environmental Science', image: '/team/bishal.jpg' },
+      { name: 'Bitan Kar', role: 'M. Sc., Department of Physics' },
+      { name: 'Ankur Mazumdar', role: 'M. Sc., Department of Biotechnology', image: '/team/ankur.jpeg' }
+    ],
+    'Treasurer': [
+      { name: 'Jyothishman Tamuli', role: 'PhD Scholar, Department of Life Science & Bioinformatics', image: '/team/jyotishman.jpg' }
     ]
   }
 
@@ -590,7 +606,7 @@ interface CommitteeMember {
           </div>
         </section>
 
-        {/* Core Team Section */}
+        {/* Core Committee Section */}
         <section
           ref={(el) => {
             if (el) sectionsRef.current[1] = el
@@ -599,14 +615,88 @@ interface CommitteeMember {
         >
           {/* Section Title */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-12 md:mb-16 text-center italic">
-            Core Team
+            Core Committee
           </h2>
 
-          {/* Members Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {committeeData['Core Team'].map((member, index) => (
-              <MemberCard key={index} member={member} />
-            ))}
+          {/* President */}
+          <div className="mb-16 md:mb-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 md:mb-12 text-center">
+              President
+            </h3>
+            <div className="flex justify-center">
+              <div className="w-full max-w-sm">
+                {committeeData['President'].map((member, index) => (
+                  <MemberCard key={`president-${index}`} member={member} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Vice-Presidents */}
+          <div className="mb-16 md:mb-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 md:mb-12 text-center">
+              Vice-Presidents
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+              <div>
+                <h4 className="text-lg md:text-xl font-semibold text-slate-300 mb-6 text-center">
+                  Vice-President (Male)
+                </h4>
+                {committeeData['Vice-President (Male)'].map((member, index) => (
+                  <MemberCard key={`vp-male-${index}`} member={member} />
+                ))}
+              </div>
+              <div>
+                <h4 className="text-lg md:text-xl font-semibold text-slate-300 mb-6 text-center">
+                  Vice-President (Female)
+                </h4>
+                {committeeData['Vice-President (Female)'].map((member, index) => (
+                  <MemberCard key={`vp-female-${index}`} member={member} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* General Secretary */}
+          <div className="mb-16 md:mb-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 md:mb-12 text-center">
+              General Secretary
+            </h3>
+            <div className="flex justify-center">
+              <div className="w-full max-w-sm">
+                {committeeData['General Secretary'].map((member, index) => (
+                  <MemberCard key={`gs-${index}`} member={member} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Treasurer */}
+          <div className="mb-16 md:mb-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 md:mb-12 text-center">
+              Treasurer
+            </h3>
+            <div className="flex justify-center">
+              <div className="w-full max-w-sm">
+                {committeeData['Treasurer'].map((member, index) => (
+                  <MemberCard key={`treasurer-${index}`} member={member} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Joint Secretaries */}
+          <div className="mb-16 md:mb-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 md:mb-12 text-center">
+              Joint Secretaries
+            </h3>
+            <div className="flex flex-wrap justify-center gap-8 md:gap-12 max-w-6xl mx-auto">
+              {committeeData['Joint Secretaries'].map((member, index) => (
+                <div key={`js-${index}`} className="w-full sm:w-[calc(50%-1rem)] md:w-[280px]">
+                  <MemberCard member={member} />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </div>

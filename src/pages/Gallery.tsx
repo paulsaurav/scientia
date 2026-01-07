@@ -1,22 +1,121 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 
+interface GalleryImage {
+  id: string
+  src: string
+  alt: string
+  category: string
+}
+
+// Function to dynamically discover gallery images
+// This function will check for images with common naming patterns
+const discoverGalleryImages = (): Promise<GalleryImage[]> => {
+  return new Promise((resolve) => {
+    const images: GalleryImage[] = []
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif']
+    
+    // Common naming patterns to check
+    const baseNames: string[] = []
+    
+    // Try patterns: g1, g2, g3... up to 200
+    // This covers common gallery naming conventions
+    for (let i = 1; i <= 200; i++) {
+      baseNames.push(`g${i}`)
+    }
+    // Also try: image1, image2, image3... up to 50
+    for (let i = 1; i <= 50; i++) {
+      baseNames.push(`image${i}`)
+      baseNames.push(`img${i}`)
+    }
+    
+    // Also check for any existing known images (you can add more here)
+    const knownImages = ['g1', 'g2', 'g3', 'g4']
+    
+    const allNames = [...new Set([...knownImages, ...baseNames])]
+    const checked = new Set<string>()
+    let checkedCount = 0
+    const totalToCheck = allNames.length * imageExtensions.length
+    
+    const checkImage = (baseName: string, ext: string) => {
+      const src = `/gallery/${baseName}.${ext}`
+      const key = `${baseName}.${ext}`
+      
+      if (checked.has(key)) {
+        checkedCount++
+        if (checkedCount >= totalToCheck) {
+          // Sort and resolve
+          const uniqueImages = Array.from(new Map(images.map(img => [img.src, img])).values())
+          uniqueImages.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' }))
+          resolve(uniqueImages)
+        }
+        return
+      }
+      
+      checked.add(key)
+      
+      const img = new Image()
+      img.onload = () => {
+        images.push({
+          id: key,
+          src,
+          alt: `Gallery Image ${baseName}`,
+          category: 'SCIENTIA 6.0'
+        })
+        checkedCount++
+        if (checkedCount >= totalToCheck) {
+          const uniqueImages = Array.from(new Map(images.map(img => [img.src, img])).values())
+          uniqueImages.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' }))
+          resolve(uniqueImages)
+        }
+      }
+      img.onerror = () => {
+        checkedCount++
+        if (checkedCount >= totalToCheck) {
+          const uniqueImages = Array.from(new Map(images.map(img => [img.src, img])).values())
+          uniqueImages.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' }))
+          resolve(uniqueImages)
+        }
+      }
+      img.src = src
+    }
+    
+    // Start checking all combinations
+    for (const baseName of allNames) {
+      for (const ext of imageExtensions) {
+        checkImage(baseName, ext)
+      }
+    }
+  })
+}
+
 const Gallery = () => {
   const galleryRef = useRef<HTMLElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  // Placeholder images - replace with actual images later
-  const galleryImages = Array.from({ length: 16 }, (_, i) => ({
-    id: i + 1,
-    src: null, // Will be replaced with actual image paths like `/gallery/image-${i + 1}.jpg`
-    alt: `Gallery Image ${i + 1}`,
-    category: ['Tech Talks', 'Exhibitions', 'Cultural Meet', 'Sports'][i % 4]
-  }))
+  // Load gallery images on component mount
+  useEffect(() => {
+    const loadImages = async () => {
+      setIsLoading(true)
+      try {
+        const images = await discoverGalleryImages()
+        setGalleryImages(images)
+      } catch (error) {
+        console.error('Error loading gallery images:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    loadImages()
+  }, [])
 
   // Animate gallery on scroll
   useEffect(() => {
-    if (!galleryRef.current || !gridRef.current) return
+    if (!galleryRef.current || !gridRef.current || isLoading) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -55,7 +154,7 @@ const Gallery = () => {
         observer.unobserve(galleryRef.current)
       }
     }
-  }, [])
+  }, [isLoading])
 
   const openModal = (index: number) => {
     setSelectedImage(index)
@@ -85,6 +184,29 @@ const Gallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedImage, galleryImages.length])
 
+  // Bento layout pattern - varied sizes
+  const getBentoClass = (index: number) => {
+    const patterns = [
+      'md:col-span-2 md:row-span-2', // Large square
+      'md:col-span-2', // Wide
+      'md:col-span-2', // Wide
+      'md:col-span-2 md:row-span-2', // Large square
+      'md:col-span-2', // Wide
+      'md:col-span-2', // Wide
+      'md:col-span-2 md:row-span-2', // Large square
+      'md:col-span-2', // Wide
+      'md:col-span-2', // Wide
+      'md:col-span-2 md:row-span-2', // Large square
+      'md:col-span-2', // Wide
+      'md:col-span-2', // Wide
+      'md:col-span-2 md:row-span-2', // Large square
+      'md:col-span-2', // Wide
+      'md:col-span-2', // Wide
+      'md:col-span-2 md:row-span-2', // Large square
+    ]
+    return patterns[index % patterns.length] || 'md:col-span-2'
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 pt-24 md:pt-32">
       {/* Hero Section */}
@@ -104,57 +226,30 @@ const Gallery = () => {
       {/* Gallery Grid - Bento Style */}
       <section ref={galleryRef} id="gallery" className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          {/* Bento Grid */}
-          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 auto-rows-fr">
-            {galleryImages.map((image, index) => {
-              // Bento layout pattern - varied sizes
-              const getBentoClass = () => {
-                const patterns = [
-                  'md:col-span-2 md:row-span-2', // Large square
-                  'md:col-span-2', // Wide
-                  'md:col-span-2', // Wide
-                  'md:col-span-2 md:row-span-2', // Large square
-                  'md:col-span-2', // Wide
-                  'md:col-span-2', // Wide
-                  'md:col-span-2 md:row-span-2', // Large square
-                  'md:col-span-2', // Wide
-                  'md:col-span-2', // Wide
-                  'md:col-span-2 md:row-span-2', // Large square
-                  'md:col-span-2', // Wide
-                  'md:col-span-2', // Wide
-                  'md:col-span-2 md:row-span-2', // Large square
-                  'md:col-span-2', // Wide
-                  'md:col-span-2', // Wide
-                  'md:col-span-2 md:row-span-2', // Large square
-                ]
-                return patterns[index % patterns.length] || 'md:col-span-2'
-              }
-
-              return (
+          {isLoading ? (
+            <div className="text-center py-20">
+              <div className="inline-block w-12 h-12 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <p className="text-slate-400">Loading gallery images...</p>
+            </div>
+          ) : galleryImages.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-slate-400 text-lg">No images found in gallery. Add images to <code className="bg-slate-800 px-2 py-1 rounded">public/gallery/</code> folder.</p>
+            </div>
+          ) : (
+            <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 auto-rows-fr">
+              {galleryImages.map((image, index) => (
                 <div
                   key={image.id}
-                  className={`group relative overflow-hidden rounded-2xl border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm cursor-pointer hover:border-cyan-500/50 transition-all duration-300 hover:scale-[1.02] min-h-[250px] ${getBentoClass()}`}
+                  className={`group relative overflow-hidden rounded-2xl border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm cursor-pointer hover:border-cyan-500/50 transition-all duration-300 hover:scale-[1.02] min-h-[250px] ${getBentoClass(index)}`}
                   onClick={() => openModal(index)}
                 >
-                  {/* Placeholder Image */}
-                  <div className="absolute inset-0 bg-linear-to-br from-slate-800 via-slate-700 to-slate-800 flex items-center justify-center">
-                    <div className="text-center p-4">
-                      <div className="w-16 h-16 mx-auto mb-3 rounded-lg bg-slate-600/50 flex items-center justify-center group-hover:bg-slate-600/70 transition-colors duration-300">
-                        <svg className="w-8 h-8 text-slate-500 group-hover:text-cyan-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                      <p className="text-xs text-slate-500 font-medium group-hover:text-cyan-400 transition-colors duration-300">{image.category}</p>
-                    </div>
-                  </div>
-
-                  {/* When image is added, uncomment this:
+                  {/* Gallery Image */}
                   <img 
                     src={image.src} 
                     alt={image.alt}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
                   />
-                  */}
 
                   {/* Overlay on hover */}
                   <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-slate-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -167,14 +262,14 @@ const Gallery = () => {
                   {/* Hover glow effect */}
                   <div className="absolute inset-0 bg-linear-to-r from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 transition-all duration-300 pointer-events-none"></div>
                 </div>
-              )
-            })}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Lightbox Modal */}
-      {selectedImage !== null && (
+      {selectedImage !== null && galleryImages[selectedImage] && (
         <div
           className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
           onClick={closeModal}
@@ -221,26 +316,13 @@ const Gallery = () => {
           )}
 
           <div className="max-w-6xl w-full" onClick={(e) => e.stopPropagation()}>
-            {/* Placeholder for modal image */}
-            <div className="relative aspect-video bg-slate-800 rounded-xl overflow-hidden border border-slate-700/50">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-lg bg-slate-700/50 flex items-center justify-center">
-                    <svg className="w-12 h-12 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <p className="text-slate-400">{galleryImages[selectedImage]?.alt}</p>
-                  <p className="text-sm text-slate-500 mt-2">{galleryImages[selectedImage]?.category}</p>
-                </div>
-              </div>
-              {/* When image is added, uncomment:
+            {/* Modal Image */}
+            <div className="relative bg-slate-800 rounded-xl overflow-hidden border border-slate-700/50">
               <img 
-                src={galleryImages[selectedImage]?.src} 
-                alt={galleryImages[selectedImage]?.alt}
-                className="w-full h-full object-contain"
+                src={galleryImages[selectedImage].src} 
+                alt={galleryImages[selectedImage].alt}
+                className="w-full h-full max-h-[80vh] object-contain"
               />
-              */}
             </div>
             
             {/* Image counter */}
@@ -257,4 +339,3 @@ const Gallery = () => {
 }
 
 export default Gallery
-

@@ -16,7 +16,12 @@ const Header = () => {
       <nav className="relative max-w-7xl mx-auto px-6 md:px-12 py-4 md:py-5">
         <div className="flex items-center justify-between">
           {/* Logo - Funky but subtle */}
-          <Link to="/" className="flex items-baseline gap-2 group cursor-pointer">
+          <Link to="/" className="flex items-center gap-3 group cursor-pointer">
+            <img 
+              src="/logo.png" 
+              alt="SCIENTIA Logo" 
+              className="h-8 md:h-10 lg:h-12 object-contain"
+            />
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] relative">
               <span className="bg-linear-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent animate-gradient">
                 SCIENTIA
