@@ -120,12 +120,12 @@ const Footer = () => {
             © {new Date().getFullYear()} SCIENTIA 6. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
-            <a href="#" className="hover:text-cyan-400 transition-colors duration-200">
+            <Link to="/privacy-policy" className="hover:text-cyan-400 transition-colors duration-200">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-cyan-400 transition-colors duration-200">
+            </Link>
+            <Link to="/terms-of-service" className="hover:text-cyan-400 transition-colors duration-200">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

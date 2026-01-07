@@ -7,6 +7,8 @@ import Gallery from './pages/Gallery'
 import Committee from './pages/Committee'
 import Events from './pages/Events'
 import Schedule from './pages/Schedule'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
 import Loader from './components/Loader'
 
 // Scroll to top component
@@ -42,6 +44,8 @@ const App = () => {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/committee" element={<Committee />} />
                 <Route path="/schedule" element={<Schedule />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
               </Routes>
             </main>
             <Footer />
