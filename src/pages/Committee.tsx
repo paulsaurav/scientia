@@ -439,7 +439,7 @@ interface CommitteeMember {
 
       {/* Committee Sections */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
-        {/* Leadership Row - Patron-in-Chief, Teacher Advisor, Chairperson */}
+        {/* Leadership Row - Patron-in-Chief, Chairperson, Teacher Advisor */}
         <section
           ref={(el) => {
             if (el) sectionsRef.current[0] = el
@@ -503,10 +503,10 @@ interface CommitteeMember {
                 </div>
               </div>
             ))}
-            {committeeData['Teacher Advisor'].map((member, index) => (
-              <div key={`advisor-${index}`} className="flex flex-col w-full">
+            {committeeData['Chairperson'].map((member, index) => (
+              <div key={`chairperson-${index}`} className="flex flex-col w-full">
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 text-center">
-                  Teacher Advisor
+                  Chairperson
                 </h3>
                 <div className="w-full">
                   <CircuitFrame className="p-5 md:p-6 min-h-[400px] md:min-h-[450px] flex flex-col">
@@ -553,10 +553,10 @@ interface CommitteeMember {
                 </div>
               </div>
             ))}
-            {committeeData['Chairperson'].map((member, index) => (
-              <div key={`chairperson-${index}`} className="flex flex-col w-full">
+            {committeeData['Teacher Advisor'].map((member, index) => (
+              <div key={`advisor-${index}`} className="flex flex-col w-full">
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 text-center">
-                  Chairperson
+                  Teacher Advisor
                 </h3>
                 <div className="w-full">
                   <CircuitFrame className="p-5 md:p-6 min-h-[400px] md:min-h-[450px] flex flex-col">
