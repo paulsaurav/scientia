@@ -22,7 +22,7 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-md">
-              The annual university festival of Assam University Science Block Departments. 
+              Annual Science Event of Assam University Science Block Departments. 
               Celebrating knowledge, innovation, and cultural diversity.
             </p>
             {/* Social Media Links */}

@@ -1,6 +1,6 @@
 # SCIENTIA 6
 
-Official website for the 6th edition of SCIENTIA, the annual university festival of Assam University Science Block Departments.
+Official website for the 6th edition of SCIENTIA, the Annual Science Event of Assam University Science Block Departments.
 
 ## About
 

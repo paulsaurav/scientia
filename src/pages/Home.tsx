@@ -818,7 +818,7 @@ const Home = () => {
                 The university offers a wide range of undergraduate, postgraduate, and doctoral programs across various disciplines including science, technology, arts, commerce, and social sciences. With state-of-the-art facilities and a dedicated faculty, Assam University continues to shape the future of education.
               </p>
               <p className="text-base md:text-lg">
-                SCIENTIA, our annual university festival, brings together students, faculty, and visitors to celebrate knowledge, innovation, and cultural diversity through a series of engaging events, competitions, and exhibitions.
+                SCIENTIA, our Annual Science Event, brings together students, faculty, and visitors to celebrate knowledge, innovation, and cultural diversity through a series of engaging events, competitions, and exhibitions.
               </p>
             </div>
           </div>
@@ -855,7 +855,7 @@ const Home = () => {
             </h2>
             <div className="space-y-4 text-slate-300 leading-relaxed">
               <p className="text-base md:text-lg">
-                SCIENTIA is the annual university festival of Assam University Science Block Departments, now celebrating its 6th edition. This grand celebration brings together research scholars, students, faculty, alumni, and visitors from across the region to experience a unique blend of science, technology, culture, and sports.
+                SCIENTIA is the Annual Science Event of Assam University Science Block Departments, now celebrating its 6th edition. This grand celebration brings together research scholars, students, faculty, alumni, and visitors from across the region to experience a unique blend of science, technology, culture, and sports.
               </p>
               <p className="text-base md:text-lg">
                 The festival showcases the best of academic excellence through tech talks, exhibitions, presentations, and other activities while also celebrating the rich cultural diversity of our community through cultural meets and competitive sports events.

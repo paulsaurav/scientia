@@ -23,7 +23,7 @@ interface CommitteeMember {
       { name: 'Prof. Prodipto Das', role: 'Proctor and HoD, Computer Science, Assam University, Silchar', image: '/team/pd-sir.jpg' }
     ],
     'Chairperson': [
-      { name: 'Prof. (Dr.) Pranab Behari Mazumder', role: 'Professor and Head, Department of Biotechnology', image: '/team/pranab-sir.png' }
+      { name: 'Prof. Pranab Behari Mazumder', role: 'Dean, Hargobind Khurana School of Life Sciences', image: '/team/pranab-sir.png' }
     ],
     'President': [
       { name: 'Nirmal Barman', role: 'PhD Scholar, Department of Physics', image: '/team/nirmal.jpeg' }
