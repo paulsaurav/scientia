@@ -38,10 +38,10 @@ interface CommitteeMember {
       { name: 'Saurav Paul', role: 'PhD Scholar, Department of Computer Science', image: '/team/saurav.jpg' }
     ],
     'Joint Secretaries': [
-      { name: 'Shivam Nath', role: 'M. Pharm, Department of Pharmaceutical Sciences' },
+      { name: 'Shivam Nath', role: 'M. Pharm, Department of Pharmaceutical Sciences', image: '/team/Shivam.jpg' },
       { name: 'Mishmi Roy', role: 'PhD Scholar, Department of Chemistry', image: '/team/mishmi.jpeg' },
       { name: 'Bishal Nath', role: 'M. Sc., Department of Ecology & Environmental Science', image: '/team/bishal.jpg' },
-      { name: 'Bitan Kar', role: 'M. Sc., Department of Physics' },
+      { name: 'Bitan Kar', role: 'M. Sc., Department of Physics', image: '/team/bitan.jpeg' },
       { name: 'Ankur Mazumdar', role: 'M. Sc., Department of Biotechnology', image: '/team/ankur.jpeg' }
     ],
     'Treasurer': [
