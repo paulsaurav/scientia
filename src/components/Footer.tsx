@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
+import { FaInstagram, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -28,32 +28,13 @@ const Footer = () => {
             {/* Social Media Links */}
             <div className="flex items-center gap-4">
               <a 
-                href="#" 
-                className="w-10 h-10 rounded-full border border-slate-800/50 bg-slate-900/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
-                aria-label="Facebook"
-              >
-                <FaFacebook />
-              </a>
-              <a 
-                href="#" 
-                className="w-10 h-10 rounded-full border border-slate-800/50 bg-slate-900/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
-                aria-label="Twitter"
-              >
-                <FaTwitter />
-              </a>
-              <a 
-                href="#" 
+                href="https://www.instagram.com/scientia_aus/?hl=en" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-slate-800/50 bg-slate-900/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <FaInstagram />
-              </a>
-              <a 
-                href="#" 
-                className="w-10 h-10 rounded-full border border-slate-800/50 bg-slate-900/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin />
               </a>
             </div>
           </div>

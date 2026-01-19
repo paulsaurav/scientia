@@ -29,6 +29,16 @@ const Home = () => {
   const registrarMessageRef = useRef<HTMLDivElement>(null)
   const [isAnimating, setIsAnimating] = useState<Set<string>>(new Set())
 
+  // Function to handle brochure download
+  const handleDownloadBrochure = () => {
+    const link = document.createElement('a')
+    link.href = '/scientia-brochure.pdf'
+    link.download = 'scientia-brochure.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   // Function to split text into words and make them interactive
   const splitIntoWords = (text: string, className: string = '') => {
     return text.split(' ').map((word, index) => (
@@ -712,7 +722,10 @@ const Home = () => {
 
           {/* CTA Buttons */}
           <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <button className="group relative px-8 py-3.5 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full tracking-wide uppercase text-sm overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]">
+            <button 
+              onClick={handleDownloadBrochure}
+              className="group relative px-8 py-3.5 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full tracking-wide uppercase text-sm overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
+            >
               <span className="relative z-10 cursor-pointer">Download Brochure</span>
               <span className="absolute inset-0 bg-linear-to-r from-cyan-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </button>
