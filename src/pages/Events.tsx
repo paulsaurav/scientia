@@ -7,35 +7,48 @@ gsap.registerPlugin(ScrollTrigger)
 interface Event {
   id: string
   name: string
-  category: 'Outdoor Sports' | 'Indoor Sports' | 'E-sports'
+  category: 'Academics' | 'Outdoor Sports' | 'Indoor Sports' | 'E-sports'
   image: string
 }
 
 const Events = () => {
   const heroRef = useRef<HTMLDivElement>(null)
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
+  const academicsRef = useRef<HTMLDivElement>(null)
   const outdoorRef = useRef<HTMLDivElement>(null)
   const indoorRef = useRef<HTMLDivElement>(null)
   const esportsRef = useRef<HTMLDivElement>(null)
 
+  const academics: Event[] = [
+    { id: '16', name: 'Quiz', category: 'Academics', image: '/events/quiz.jpg' },
+    { id: '17', name: 'Oral Presentation', category: 'Academics', image: '/events/oral-presentation.jpg' },
+    { id: '18', name: 'Poster Presentation', category: 'Academics', image: '/events/poster-presentation.jpg' },
+    { id: '19', name: 'Model Exhibition', category: 'Academics', image: '/events/model-exhibition.jpg' },
+    { id: '20', name: 'Debate', category: 'Academics', image: '/events/debate.jpg' }
+  ]
+
   const outdoorSports: Event[] = [
     { id: '1', name: 'Cricket', category: 'Outdoor Sports', image: '/events/cricket.jpg' },
-    { id: '2', name: 'Volleyball', category: 'Outdoor Sports', image: '/events/volleyball.jpg' },
-    { id: '3', name: 'Basketball', category: 'Outdoor Sports', image: '/events/basketball.jpg' },
-    { id: '4', name: 'Javelin Throw', category: 'Outdoor Sports', image: '/events/javelin.webp' },
-    { id: '5', name: 'Shotput Throw', category: 'Outdoor Sports', image: '/events/shot-put.webp' }
+    { id: '2', name: 'Football', category: 'Outdoor Sports', image: '/events/football.jpg' },
+    { id: '3', name: 'Relay Race', category: 'Outdoor Sports', image: '/events/relay-race.svg' },
+    { id: '4', name: 'Tug of War', category: 'Outdoor Sports', image: '/events/tug-of-war.jpg' },
+    { id: '5', name: 'Volleyball', category: 'Outdoor Sports', image: '/events/volleyball.jpg' }
   ]
 
   const indoorSports: Event[] = [
     { id: '6', name: 'Carrom', category: 'Indoor Sports', image: '/events/carrom.jpg' },
     { id: '7', name: 'Table Tennis', category: 'Indoor Sports', image: '/events/table-tennis.jpg' },
     { id: '8', name: 'Badminton', category: 'Indoor Sports', image: '/events/badminton.jpg' },
-    { id: '9', name: 'Chess', category: 'Indoor Sports', image: '/events/chess.jpg' }
+    { id: '9', name: 'Chess', category: 'Indoor Sports', image: '/events/chess.jpg' },
+    { id: '12', name: 'Power Lifting', category: 'Indoor Sports', image: '/events/power-lifting.jpg' }
   ]
 
   const esports: Event[] = [
-    { id: '10', name: 'FIFA', category: 'E-sports', image: '/events/fifa.jpg' },
-    { id: '11', name: 'NFS Most Wanted', category: 'E-sports', image: '/events/nfs.jpg' }
+    { id: '10', name: 'Fifa 22/FC25', category: 'E-sports', image: '/events/fifa.jpg' },
+    { id: '11', name: 'NFS MW', category: 'E-sports', image: '/events/nfs.jpg' },
+    { id: '13', name: 'eFootball', category: 'E-sports', image: '/events/efootball.jpg' },
+    { id: '14', name: 'Takken 7/8', category: 'E-sports', image: '/events/takken.jpg' },
+    { id: '15', name: 'Moba Legends', category: 'E-sports', image: '/events/moba-legends.jpg' }
   ]
 
   // Hero animation
@@ -55,6 +68,27 @@ const Events = () => {
   // Section animations
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Academics
+      if (academicsRef.current) {
+        const cards = academicsRef.current.children
+        gsap.fromTo(cards,
+          { opacity: 0, y: 50, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: academicsRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            }
+          }
+        )
+      }
+
       // Outdoor Sports
       if (outdoorRef.current) {
         const cards = outdoorRef.current.children
@@ -173,6 +207,25 @@ const Events = () => {
         </div>
       </section>
 
+      {/* Academics */}
+      <section className="relative py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-200 mb-2">
+              <span className="bg-linear-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Academics
+              </span>
+            </h2>
+            <div className="w-16 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500"></div>
+          </div>
+          <div ref={academicsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
+            {academics.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Outdoor Sports */}
       <section className="relative py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -203,7 +256,7 @@ const Events = () => {
             </h2>
             <div className="w-16 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500"></div>
           </div>
-          <div ref={indoorRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div ref={indoorRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
             {indoorSports.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
@@ -222,7 +275,7 @@ const Events = () => {
             </h2>
             <div className="w-16 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500"></div>
           </div>
-          <div ref={esportsRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+          <div ref={esportsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
             {esports.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}

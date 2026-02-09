@@ -251,14 +251,6 @@ const Gallery = () => {
                     loading="lazy"
                   />
 
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-slate-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-4 md:p-6 w-full">
-                      <p className="text-sm md:text-base font-medium text-white mb-1">{image.alt}</p>
-                      <p className="text-xs text-slate-300">{image.category}</p>
-                    </div>
-                  </div>
-
                   {/* Hover glow effect */}
                   <div className="absolute inset-0 bg-linear-to-r from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 transition-all duration-300 pointer-events-none"></div>
                 </div>
