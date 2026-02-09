@@ -36,27 +36,83 @@ const Header = () => {
 
           {/* Navigation Links - Clean and modern */}
           <div className="hidden md:flex items-center gap-8 lg:gap-10">
+            <Link
+              to="/"
+              className={`relative text-xs font-medium transition-colors duration-200 tracking-wide uppercase ${
+                activePath === '/' ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Home
+            </Link>
+
+            {/* Events dropdown */}
+            <div className="relative group">
+              <Link
+                to="/events"
+                className={`relative text-xs font-medium transition-colors duration-200 tracking-wide uppercase flex items-center gap-1 ${
+                  ['/events', '/rule-book', '/grading-system', '/points-table'].includes(activePath)
+                    ? 'text-cyan-400'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                Events
+                <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="bg-slate-900/95 backdrop-blur-md border border-slate-800/50 rounded-lg py-2 min-w-[180px] shadow-xl">
+                  <Link
+                    to="/events"
+                    className={`block px-4 py-2.5 text-sm uppercase tracking-wide transition-colors ${
+                      activePath === '/events' ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    }`}
+                  >
+                    Events
+                  </Link>
+                  <Link
+                    to="/rule-book"
+                    className={`block px-4 py-2.5 text-sm uppercase tracking-wide transition-colors ${
+                      activePath === '/rule-book' ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    }`}
+                  >
+                    Rule Book
+                  </Link>
+                  <Link
+                    to="/grading-system"
+                    className={`block px-4 py-2.5 text-sm uppercase tracking-wide transition-colors ${
+                      activePath === '/grading-system' ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    }`}
+                  >
+                    Grading System
+                  </Link>
+                  <Link
+                    to="/points-table"
+                    className={`block px-4 py-2.5 text-sm uppercase tracking-wide transition-colors ${
+                      activePath === '/points-table' ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    }`}
+                  >
+                    Points Table
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             {[
-              { name: 'Home', path: '/', exact: true },
-              { name: 'Events', path: '/events' },
               { name: 'Gallery', path: '/gallery' },
               { name: 'Committee', path: '/committee' },
               { name: 'Schedule', path: '/schedule' },
             ].map((item) => {
-              // Only highlight Home when exactly on "/", Events should not highlight on home page
-              const isActive = item.exact 
-                ? activePath === item.path 
-                : activePath === item.path
-              
+              const isActive = activePath === item.path
               return (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`relative text-xs font-medium transition-colors duration-200 tracking-wide uppercase group ${
+                  className={`relative text-xs font-medium transition-colors duration-200 tracking-wide uppercase ${
                     isActive ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
-                  <span className="relative">{item.name}</span>
+                  {item.name}
                 </Link>
               )
             })}
@@ -92,9 +148,21 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 animate-slide-down">
             <div className="flex flex-col gap-1 pt-4 border-t border-slate-800/40">
+              <Link
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-900/30 rounded-md transition-all duration-200 text-sm font-medium uppercase tracking-wide"
+              >
+                Home
+              </Link>
+              <div className="pl-4 border-l border-slate-700/50 space-y-1 my-1">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider py-1.5">Events</p>
+                <Link to="/events" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-900/30 rounded-md text-sm font-medium uppercase tracking-wide">Events</Link>
+                <Link to="/rule-book" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-900/30 rounded-md text-sm font-medium uppercase tracking-wide">Rule Book</Link>
+                <Link to="/grading-system" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-900/30 rounded-md text-sm font-medium uppercase tracking-wide">Grading System</Link>
+                <Link to="/points-table" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-900/30 rounded-md text-sm font-medium uppercase tracking-wide">Points Table</Link>
+              </div>
               {[
-                { name: 'Home', path: '/' },
-                { name: 'Events', path: '/events' },
                 { name: 'Gallery', path: '/gallery' },
                 { name: 'Committee', path: '/committee' },
                 { name: 'Schedule', path: '/schedule' },

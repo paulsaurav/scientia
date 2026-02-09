@@ -7,8 +7,9 @@ gsap.registerPlugin(ScrollTrigger)
 interface Event {
   id: string
   name: string
-  category: 'Academics' | 'Outdoor Sports' | 'Indoor Sports' | 'E-sports'
+  category: 'Academics' | 'Outdoor Sports' | 'Indoor Sports' | 'E-sports' | 'Cultural'
   image: string
+  subcategory?: string
 }
 
 const Events = () => {
@@ -18,6 +19,7 @@ const Events = () => {
   const outdoorRef = useRef<HTMLDivElement>(null)
   const indoorRef = useRef<HTMLDivElement>(null)
   const esportsRef = useRef<HTMLDivElement>(null)
+  const culturalRef = useRef<HTMLDivElement>(null)
 
   const academics: Event[] = [
     { id: '16', name: 'Quiz', category: 'Academics', image: '/events/quiz.jpg' },
@@ -49,6 +51,25 @@ const Events = () => {
     { id: '13', name: 'eFootball', category: 'E-sports', image: '/events/efootball.jpg' },
     { id: '14', name: 'Takken 7/8', category: 'E-sports', image: '/events/takken.jpg' },
     { id: '15', name: 'Moba Legends', category: 'E-sports', image: '/events/moba-legends.jpg' }
+  ]
+
+  const culturalMusic: Event[] = [
+    { id: 'c1', name: 'Classical', category: 'Cultural', image: '/events/cultural-music.jpg', subcategory: 'Music' },
+    { id: 'c2', name: 'Rabindra Sangeet', category: 'Cultural', image: '/events/cultural-music.jpg', subcategory: 'Music' },
+    { id: 'c3', name: 'Nazrul Geeti', category: 'Cultural', image: '/events/cultural-music.jpg', subcategory: 'Music' },
+    { id: 'c4', name: 'Modern', category: 'Cultural', image: '/events/cultural-music.jpg', subcategory: 'Music' },
+    { id: 'c5', name: 'Adhunik', category: 'Cultural', image: '/events/cultural-music.jpg', subcategory: 'Music' },
+    { id: 'c6', name: 'Folk', category: 'Cultural', image: '/events/cultural-music.jpg', subcategory: 'Music' },
+  ]
+
+  const culturalDance: Event[] = [
+    { id: 'c7', name: 'Semi-classical', category: 'Cultural', image: '/events/cultural-dance.jpg', subcategory: 'Dance' },
+    { id: 'c8', name: 'Modern', category: 'Cultural', image: '/events/cultural-dance.jpg', subcategory: 'Dance' },
+    { id: 'c9', name: 'Group', category: 'Cultural', image: '/events/cultural-dance.jpg', subcategory: 'Dance' },
+  ]
+
+  const culturalMrMiss: Event[] = [
+    { id: 'c10', name: 'Mr and Miss Scientia', category: 'Cultural', image: '/events/cultural-mr-miss.jpg' },
   ]
 
   // Hero animation
@@ -151,16 +172,41 @@ const Events = () => {
           }
         )
       }
+
+      // Cultural
+      if (culturalRef.current) {
+        const cards = culturalRef.current.querySelectorAll('[data-cultural-card]')
+        gsap.fromTo(cards,
+          { opacity: 0, y: 50, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: culturalRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            }
+          }
+        )
+      }
     })
 
     return () => ctx.revert()
   }, [])
 
-  const EventCard = ({ event }: { event: Event }) => {
+  const EventCard = ({ event, dataCulturalCard, size = 'default', hideTitle }: { event: Event; dataCulturalCard?: boolean; size?: 'default' | 'large'; hideTitle?: boolean }) => {
+    const isLarge = size === 'large'
     return (
-      <div className="group relative overflow-hidden rounded-2xl border-2 border-slate-800/50 bg-slate-900/30 backdrop-blur-sm hover:border-cyan-500/60 transition-all duration-500 cursor-pointer hover:shadow-2xl hover:shadow-cyan-500/20">
+      <div
+        className="group relative overflow-hidden rounded-2xl border-2 border-slate-800/50 bg-slate-900/30 backdrop-blur-sm hover:border-cyan-500/60 transition-all duration-500 cursor-pointer hover:shadow-2xl hover:shadow-cyan-500/20"
+        {...(dataCulturalCard ? { 'data-cultural-card': '' } : {})}
+      >
         {/* Image Container */}
-        <div className="relative aspect-video overflow-hidden">
+        <div className={`relative overflow-hidden ${isLarge ? 'aspect-3/2' : 'aspect-video'}`}>
           <img 
             src={event.image} 
             alt={event.name}
@@ -173,13 +219,15 @@ const Events = () => {
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         </div>
 
-        {/* Content Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
-          <h3 className="text-xl md:text-2xl font-black text-white mb-1 group-hover:text-cyan-400 transition-colors duration-300">
-            {event.name}
-          </h3>
-          <div className="w-12 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500 group-hover:w-16 transition-all duration-300"></div>
-        </div>
+        {/* Content Overlay - hidden when hideTitle */}
+        {!hideTitle && (
+          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
+            <h3 className={`font-black text-white mb-1 group-hover:text-cyan-400 transition-colors duration-300 ${isLarge ? 'text-2xl md:text-4xl' : 'text-xl md:text-2xl'}`}>
+              {event.name}
+            </h3>
+            <div className="w-12 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500 group-hover:w-16 transition-all duration-300"></div>
+          </div>
+        )}
 
         {/* Corner Accents */}
         <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-cyan-400/0 group-hover:border-cyan-400/60 rounded-tr-2xl transition-all duration-300"></div>
@@ -265,7 +313,7 @@ const Events = () => {
       </section>
 
       {/* E-sports */}
-      <section className="relative py-12 md:py-16 pb-24 md:pb-32">
+      <section className="relative py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-slate-200 mb-2">
@@ -278,6 +326,51 @@ const Events = () => {
           <div ref={esportsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
             {esports.map((event) => (
               <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Cultural */}
+      <section ref={culturalRef} className="relative py-12 md:py-16 pb-24 md:pb-32">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-200 mb-2">
+              <span className="bg-linear-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Cultural
+              </span>
+            </h2>
+            <div className="w-16 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500"></div>
+          </div>
+
+          {/* Music */}
+          <div className="mb-10">
+            <h3 className="text-xl md:text-2xl font-bold text-slate-300 mb-4 flex items-center gap-2">
+              <span className="text-cyan-400">Music</span>
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
+              {culturalMusic.map((event) => (
+                <EventCard key={event.id} event={event} dataCulturalCard />
+              ))}
+            </div>
+          </div>
+
+          {/* Dance */}
+          <div className="mb-10">
+            <h3 className="text-xl md:text-2xl font-bold text-slate-300 mb-4 flex items-center gap-2">
+              <span className="text-cyan-400">Dance</span>
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {culturalDance.map((event) => (
+                <EventCard key={event.id} event={event} dataCulturalCard />
+              ))}
+            </div>
+          </div>
+
+          {/* Mr and Miss Scientia - full-width card */}
+          <div className="w-full">
+            {culturalMrMiss.map((event) => (
+              <EventCard key={event.id} event={event} dataCulturalCard size="large" />
             ))}
           </div>
         </div>
