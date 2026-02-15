@@ -149,7 +149,6 @@ const GradingSystem = () => {
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">1st Place</td><td className="px-4 py-3 font-medium text-white">15</td></tr>
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">2nd Place</td><td className="px-4 py-3 font-medium text-white">10</td></tr>
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">3rd Place</td><td className="px-4 py-3 font-medium text-white">7</td></tr>
-                    <tr className="border-b border-slate-700/30"><td className="px-4 py-3">4th Place</td><td className="px-4 py-3 font-medium text-white">5</td></tr>
                     <tr><td className="px-4 py-3">Participation (Played but no rank)</td><td className="px-4 py-3 font-medium text-white">2</td></tr>
                   </tbody>
                 </table>
@@ -171,7 +170,6 @@ const GradingSystem = () => {
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">1st Place</td><td className="px-4 py-3 font-medium text-white">10</td></tr>
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">2nd Place</td><td className="px-4 py-3 font-medium text-white">7</td></tr>
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">3rd Place</td><td className="px-4 py-3 font-medium text-white">5</td></tr>
-                    <tr className="border-b border-slate-700/30"><td className="px-4 py-3">4th Place</td><td className="px-4 py-3 font-medium text-white">3</td></tr>
                     <tr><td className="px-4 py-3">Participation (Played but no rank)</td><td className="px-4 py-3 font-medium text-white">1</td></tr>
                   </tbody>
                 </table>

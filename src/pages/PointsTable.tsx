@@ -46,9 +46,9 @@ const PointsTable = () => {
     return () => ctx.revert()
   }, [])
 
-  // Department points (updated from event results; Team: 1st=15, 2nd=10, 3rd=7, participation=2; Individual: 1st=10, 2nd=7, 3rd=5, 4th=3; participation=1)
+  // Department points (updated from event results; Team: 1st=15, 2nd=10, 3rd=7, participation=2; Individual: 1st=10, 2nd=7, 3rd=5; participation=1)
   const departments = [
-    { name: 'Pharmaceutical Sciences', points: 51 },
+    { name: 'Pharmaceutical Sciences', points: 48 },
     { name: 'Microbiology', points: 0 },
     { name: 'Biotechnology', points: 9 },
     { name: 'Life Science & Bioinformatics', points: 33 },
@@ -56,7 +56,7 @@ const PointsTable = () => {
     { name: 'Physics', points: 146 },
     { name: 'Statistics', points: 5 },
     { name: 'Chemistry', points: 81 },
-    { name: 'Computer Science', points: 122 },
+    { name: 'Computer Science', points: 116 },
     { name: 'Mathematics', points: 0 },
     { name: 'Earth Science', points: 35 },
     { name: 'Education (B.Sc B.Ed)', points: 20 },
@@ -98,7 +98,6 @@ const PointsTable = () => {
         { position: '1st', players: 'Siddhant Biswas', department: 'Computer Science', points: 10 },
         { position: '2nd', players: 'Deepak Singha', department: 'Computer Science', points: 7 },
         { position: '3rd', players: 'Amrit Dey', department: 'Earth Science', points: 5 },
-        { position: '4th', players: 'Kangkonmoi Borah', department: 'Pharmaceutical Sciences', points: 3 },
       ],
     },
     {
@@ -108,7 +107,6 @@ const PointsTable = () => {
         { position: '1st', players: 'Hrishikesh Sarma', department: 'Physics', points: 10 },
         { position: '2nd', players: 'Nibir Gogoi', department: 'Earth Science', points: 7 },
         { position: '3rd', players: 'Geetaraj Dutta', department: 'Chemistry', points: 5 },
-        { position: '4th', players: 'Biraj Paul', department: 'Computer Science', points: 3 },
       ],
     },
     {
@@ -118,7 +116,6 @@ const PointsTable = () => {
         { position: '1st', players: 'Siddhant Biswas', department: 'Computer Science', points: 10 },
         { position: '2nd', players: 'Debajit Paul', department: 'Computer Science', points: 7 },
         { position: '3rd', players: 'Geetaraj Dutta', department: 'Chemistry', points: 5 },
-        { position: '4th', players: 'Deepak Singha', department: 'Computer Science', points: 3 },
       ],
     },
     {
@@ -273,7 +270,6 @@ const PointsTable = () => {
     { position: '1st Place', points: 10 },
     { position: '2nd Place', points: 7 },
     { position: '3rd Place', points: 5 },
-    { position: '4th Place', points: 3 },
     { position: 'Participation (Played but no rank)', points: 1 },
   ]
 
