@@ -51,13 +51,13 @@ const PointsTable = () => {
     { name: 'Pharmaceutical Sciences', points: 48 },
     { name: 'Microbiology', points: 0 },
     { name: 'Biotechnology', points: 9 },
-    { name: 'Life Science & Bioinformatics', points: 33 },
+    { name: 'Life Science & Bioinformatics', points: 43 },
     { name: 'Ecology & Environmental Science', points: 28 },
-    { name: 'Physics', points: 146 },
-    { name: 'Statistics', points: 5 },
-    { name: 'Chemistry', points: 81 },
-    { name: 'Computer Science', points: 116 },
-    { name: 'Mathematics', points: 0 },
+    { name: 'Physics', points: 161 },
+    { name: 'Statistics', points: 12 },
+    { name: 'Chemistry', points: 88 },
+    { name: 'Computer Science', points: 131 },
+    { name: 'Mathematics', points: 12 },
     { name: 'Earth Science', points: 35 },
     { name: 'Education (B.Sc B.Ed)', points: 20 },
   ]
@@ -107,6 +107,7 @@ const PointsTable = () => {
         { position: '1st', players: 'Hrishikesh Sarma', department: 'Physics', points: 10 },
         { position: '2nd', players: 'Nibir Gogoi', department: 'Earth Science', points: 7 },
         { position: '3rd', players: 'Geetaraj Dutta', department: 'Chemistry', points: 5 },
+        { position: 'Participation', players: 'Rohit Deb', department: 'Mathematics', points: 1 },
       ],
     },
     {
@@ -134,6 +135,24 @@ const PointsTable = () => {
         { position: '1st', players: 'Team', department: 'Pharmaceutical Sciences', points: 15 },
         { position: '2nd', players: 'Team', department: 'Computer Science', points: 10 },
         { position: '3rd', players: 'Team', department: 'Chemistry', points: 7 },
+      ],
+    },
+    {
+      eventName: 'Relay Race',
+      category: 'Girls',
+      positions: [
+        { position: '1st', players: 'Chandana Amphi, Soraisam Brinda Dzongri, Dipana Barman, Monoswini', department: 'Physics', points: 15 },
+        { position: '2nd', players: 'Jannat Yasmin Laskar, Shweta Nath, L. Bijaita Singha, A. Bichitra', department: 'Life Science & Bioinformatics', points: 10 },
+        { position: '3rd', players: 'Afruza, Satarupa, Kristina, Biponshi', department: 'Statistics', points: 7 },
+      ],
+    },
+    {
+      eventName: 'Relay Race',
+      category: 'Boys',
+      positions: [
+        { position: '1st', players: 'Suyash Timsina, Alfred Lalrochan, Bidyasagar Ree, Soibam Ashokumar Meitei', department: 'Computer Science', points: 15 },
+        { position: '2nd', players: 'Sidhartha Deb, Subhasis Roy, Dhruvo Sinam, Ankurjyoti Bora', department: 'Mathematics', points: 10 },
+        { position: '3rd', players: 'Riajul Haque Laskar, Bagmin Phukon, Debashis Boruah, Thirbuljem Hrangkhol', department: 'Chemistry', points: 7 },
       ],
     },
     {
@@ -188,6 +207,7 @@ const PointsTable = () => {
         { position: '1st', players: 'Monoswini Chakravorty', department: 'Physics', points: 10 },
         { position: '2nd', players: 'Ishika Agarwal', department: 'Pharmaceutical Sciences', points: 7 },
         { position: '3rd', players: 'Jannat', department: 'Life Science & Bioinformatics', points: 5 },
+        { position: 'Participation', players: 'Swarnali Paul', department: 'Mathematics', points: 1 },
       ],
     },
     {
