@@ -123,4 +123,64 @@
   .animation-delay-4000 {
     animation-delay: 4s;
   }
+
+  /* Title sponsor shimmer */
+  @keyframes sponsor-shimmer {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateX(200%) skewX(-12deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-sponsor-shimmer {
+    animation: sponsor-shimmer 2.5s ease-in-out 0.3s;
+  }
+
+  @keyframes sponsor-glow-pulse {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.08);
+    }
+  }
+
+  .animate-sponsor-glow-pulse {
+    animation: sponsor-glow-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes sponsor-float {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-8px) scale(1.01);
+    }
+  }
+
+  .animate-sponsor-float {
+    animation: sponsor-float 5s ease-in-out infinite;
+  }
+
+  @keyframes sponsor-border-glow {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(34, 211, 238, 0.3), 0 0 60px rgba(52, 211, 153, 0.15);
+    }
+    50% {
+      box-shadow: 0 0 50px rgba(34, 211, 238, 0.5), 0 0 90px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  .animate-sponsor-border-glow {
+    animation: sponsor-border-glow 3s ease-in-out infinite;
+  }
 }

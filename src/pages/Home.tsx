@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { FaMicroscope, FaRocket, FaUsers, FaTrophy } from 'react-icons/fa'
 
+// Brand Alley sponsors: add logo filenames from public/sponsors/brand-ally/
+const BRAND_ALLY_LOGOS = [
+  '1.png'
+]
+
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -27,7 +32,13 @@ const Home = () => {
   const vcMessageRef = useRef<HTMLDivElement>(null)
   const registrarImageRef = useRef<HTMLDivElement>(null)
   const registrarMessageRef = useRef<HTMLDivElement>(null)
+  const titleSponsorSectionRef = useRef<HTMLElement>(null)
+  const titleSponsorLogoRef = useRef<HTMLDivElement>(null)
+  const titleSponsorBadgeRef = useRef<HTMLDivElement>(null)
+  const brandAlleySectionRef = useRef<HTMLElement>(null)
+  const brandAlleyGridRef = useRef<HTMLDivElement>(null)
   const [isAnimating, setIsAnimating] = useState<Set<string>>(new Set())
+  const [sponsorVisible, setSponsorVisible] = useState(false)
 
   // Function to handle brochure download
   const handleDownloadBrochure = () => {
@@ -297,6 +308,85 @@ const Home = () => {
     }, heroRef)
 
     return () => ctx.revert()
+  }, [])
+
+  // Animate title sponsor section on scroll
+  useEffect(() => {
+    if (!titleSponsorSectionRef.current) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+            if (titleSponsorBadgeRef.current) {
+              gsap.set(titleSponsorBadgeRef.current, { opacity: 0, y: -20, scale: 0.9 })
+              tl.to(titleSponsorBadgeRef.current, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+                ease: 'back.out(1.4)'
+              })
+            }
+            if (titleSponsorLogoRef.current) {
+              gsap.set(titleSponsorLogoRef.current, { opacity: 0, scale: 0.7, y: 30 })
+              tl.to(titleSponsorLogoRef.current, {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 1,
+                ease: 'back.out(1.2)'
+              }, '-=0.2')
+            }
+            setSponsorVisible(true)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+
+    observer.observe(titleSponsorSectionRef.current)
+    return () => {
+      if (titleSponsorSectionRef.current) observer.unobserve(titleSponsorSectionRef.current)
+    }
+  }, [])
+
+  // Animate Brand Alley section on scroll
+  useEffect(() => {
+    if (!brandAlleySectionRef.current || !brandAlleyGridRef.current) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const cards = brandAlleyGridRef.current?.children
+            if (cards && cards.length) {
+              gsap.fromTo(
+                Array.from(cards),
+                { opacity: 0, y: 40, scale: 0.92 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  duration: 0.7,
+                  stagger: 0.08,
+                  ease: 'back.out(1.2)',
+                }
+              )
+            }
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(brandAlleySectionRef.current)
+    return () => {
+      if (brandAlleySectionRef.current) observer.unobserve(brandAlleySectionRef.current)
+    }
   }, [])
 
   // Animate features section on scroll
@@ -747,6 +837,137 @@ const Home = () => {
           
           <div ref={decor2Ref} className="absolute bottom-20 right-10 w-12 h-12 opacity-20 hidden lg:block">
             <div className="w-full h-full border-2 border-purple-400/30 transform rotate-45"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Title Sponsor - Ultra premium spotlight */}
+      <section
+        ref={titleSponsorSectionRef}
+        className={`relative py-20 md:py-28 overflow-hidden ${sponsorVisible ? 'sponsor-visible' : ''}`}
+      >
+        {/* Layered gradient background */}
+        <div className="absolute inset-0 bg-slate-950">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_50%_50%,rgba(34,211,238,0.12),transparent_55%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_20%,rgba(52,211,153,0.1),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_80%_80%,rgba(59,130,246,0.08),transparent_45%)]"></div>
+          {/* Subtle grid */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(34,211,238,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.5) 1px, transparent 1px)', backgroundSize: '48px 48px' }}></div>
+          {/* Top/bottom light lines */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-400/50 to-transparent"></div>
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-linear-to-r from-transparent via-blue-500/40 to-transparent"></div>
+        </div>
+
+        {/* Floating orbs */}
+        <div className="absolute top-1/4 left-[15%] w-32 h-32 rounded-full bg-cyan-500/10 blur-3xl animate-sponsor-glow-pulse pointer-events-none"></div>
+        <div className="absolute bottom-1/4 right-[10%] w-40 h-40 rounded-full bg-emerald-500/10 blur-3xl animate-sponsor-glow-pulse animation-delay-2000 pointer-events-none"></div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12">
+          {/* "Title Sponsor" badge - upgraded */}
+          <div
+            ref={titleSponsorBadgeRef}
+            className="flex justify-center mb-10"
+          >
+            <span className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-cyan-400/50 bg-slate-900/90 backdrop-blur-xl shadow-[0_0_30px_rgba(34,211,238,0.2),inset_0_1px_0_rgba(255,255,255,0.05)]">
+              <span className="flex gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse animation-delay-2000" style={{ animationDelay: '0.3s' }}></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" style={{ animationDelay: '0.6s' }}></span>
+              </span>
+              <span className="text-sm font-black uppercase tracking-[0.4em] bg-linear-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent bg-size-[200%_100%] animate-gradient">
+                Title Sponsor
+              </span>
+            </span>
+          </div>
+
+          {/* Logo container - ultra premium */}
+          <div
+            ref={titleSponsorLogoRef}
+            className="group relative flex justify-center animate-sponsor-float"
+          >
+            {/* Multi-layer glow */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-[min(480px,95vw)] h-40 md:h-48 rounded-3xl bg-linear-to-r from-cyan-500/25 via-emerald-500/25 to-blue-500/25 blur-3xl animate-sponsor-glow-pulse scale-110"></div>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-[min(440px,90vw)] h-36 md:h-44 rounded-2xl bg-cyan-400/10 blur-2xl group-hover:bg-cyan-400/20 transition-colors duration-700 scale-105"></div>
+            </div>
+
+            {/* Gradient border + shimmer */}
+            <div className="relative p-[3px] rounded-2xl bg-linear-to-r from-cyan-400 via-emerald-400 to-blue-500 bg-size-[200%_100%] animate-gradient animate-sponsor-border-glow shadow-[0_0_50px_rgba(34,211,238,0.3),0_0_100px_rgba(59,130,246,0.15)] group-hover:shadow-[0_0_70px_rgba(34,211,238,0.4),0_0_120px_rgba(59,130,246,0.2)] transition-all duration-500 group-hover:scale-[1.02]">
+              {/* Shimmer overlay - runs when section scrolls into view */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none z-10">
+                <div className={`absolute inset-0 -translate-x-full w-1/2 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 ${sponsorVisible ? 'animate-sponsor-shimmer' : ''}`}></div>
+              </div>
+              <div className="relative flex items-center justify-center min-h-[160px] md:min-h-[180px] w-[min(420px,88vw)] rounded-[13px] bg-slate-900/95 backdrop-blur-xl border border-slate-600/30 px-10 py-8 shadow-inner">
+                {/* Corner accents */}
+                <div className="absolute top-3 left-3 w-10 h-10 border-t-2 border-l-2 border-cyan-400/40 rounded-tl-xl"></div>
+                <div className="absolute top-3 right-3 w-10 h-10 border-t-2 border-r-2 border-cyan-400/40 rounded-tr-xl"></div>
+                <div className="absolute bottom-3 left-3 w-10 h-10 border-b-2 border-l-2 border-cyan-400/40 rounded-bl-xl"></div>
+                <div className="absolute bottom-3 right-3 w-10 h-10 border-b-2 border-r-2 border-cyan-400/40 rounded-br-xl"></div>
+                <img
+                  src="/sponsors/title.png"
+                  alt="Title Sponsor"
+                  className="relative z-10 max-h-24 md:max-h-32 w-auto object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] group-hover:scale-110 group-hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.25)] transition-all duration-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Tagline */}
+          <p className="text-center mt-6 text-slate-500 text-sm font-medium tracking-widest uppercase">
+            Proudly partnered with excellence
+          </p>
+        </div>
+      </section>
+
+      {/* Brand Alley Sponsors */}
+      <section
+        ref={brandAlleySectionRef}
+        className="relative py-20 md:py-28 overflow-hidden bg-slate-900/50"
+      >
+        <div className="absolute inset-0 bg-slate-950">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,rgba(52,211,153,0.06),transparent_55%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_80%,rgba(34,211,238,0.05),transparent_50%)]"></div>
+          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(52,211,153,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(52,211,153,0.4) 1px, transparent 1px)', backgroundSize: '56px 56px' }}></div>
+          <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-emerald-400/30 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-400/25 to-transparent"></div>
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-emerald-400/40 bg-slate-900/80 backdrop-blur-md shadow-[0_0_24px_rgba(52,211,153,0.12)] mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="text-xs font-bold uppercase tracking-[0.3em] text-emerald-400/90">
+                Brand Alley
+              </span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-200 tracking-tight">
+              Our <span className="bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Partners</span> in Innovation
+            </h2>
+            <p className="mt-2 text-slate-500 text-sm max-w-md mx-auto">
+              Together with leading brands who share our vision for science and discovery
+            </p>
+          </div>
+
+          <div
+            ref={brandAlleyGridRef}
+            className="flex flex-wrap justify-center items-stretch gap-4 md:gap-6"
+          >
+            {BRAND_ALLY_LOGOS.map((filename, index) => (
+              <div
+                key={filename + index}
+                className="group relative flex justify-center items-center w-36 sm:w-40 md:w-44 min-h-[120px] md:min-h-[140px] p-6 rounded-2xl border border-slate-700/50 bg-slate-900/40 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/40 hover:bg-slate-900/70 hover:shadow-[0_0_30px_rgba(52,211,153,0.15)] hover:scale-[1.03]"
+              >
+                <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-emerald-500/0 to-cyan-500/0 group-hover:from-emerald-500/5 group-hover:to-cyan-500/5 transition-all duration-300 pointer-events-none"></div>
+                <div className="absolute top-2 right-2 w-6 h-6 border-t border-r border-emerald-400/20 rounded-tr-lg group-hover:border-emerald-400/40 transition-colors"></div>
+                <img
+                  src={`/sponsors/brand-ally/${filename}`}
+                  alt={`Brand Alley partner ${index + 1}`}
+                  className="relative z-10 max-h-14 md:max-h-16 w-full object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
