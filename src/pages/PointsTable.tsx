@@ -46,19 +46,20 @@ const PointsTable = () => {
     return () => ctx.revert()
   }, [])
 
-  // Department-wise points calculated from Badminton, Football, Cricket, Table Tennis, Volleyball, Chess, Carrom, Powerlifting, Tekken, NFS-MW, FIFA, eFootball, and Relay Race results so far
+  // Department-wise points calculated from sports, eSports, and cultural events declared so far (see page subtitle for list)
   const departments = [
-    { name: 'Computer Science', points: 208 },
-    { name: 'Physics', points: 187 },
-    { name: 'Life Science & Bioinformatics', points: 118 },
-    { name: 'Chemistry', points: 103 },
-    { name: 'Pharmaceutical Sciences', points: 59 },
-    { name: 'Ecology & Environmental Science', points: 49 },
-    { name: 'Statistics', points: 29 },
-    { name: 'Biotechnology', points: 17 },
-    { name: 'Earth Science', points: 43 },
-    { name: 'Mathematics', points: 10 },
-    { name: 'Education (B.Sc B.Ed)', points: 20 },
+    { name: 'Computer Science', points: 223 },
+    { name: 'Physics', points: 220 },
+    { name: 'Life Science & Bioinformatics', points: 180 },
+    { name: 'Chemistry', points: 161 },
+    { name: 'Pharmaceutical Sciences', points: 90 },
+    { name: 'Ecology & Environmental Science', points: 65 },
+    { name: 'Statistics', points: 45 },
+    { name: 'Biotechnology', points: 52 },
+    { name: 'Earth Science', points: 45 },
+    { name: 'Mathematics', points: 19 },
+    { name: 'Education (B.Sc B.Ed)', points: 34 },
+    { name: 'Microbiology', points: 1 },
   ]
 
   // Event results with points as per Grading System
@@ -687,7 +688,158 @@ const PointsTable = () => {
         },
       ],
     },
+    {
+      eventName: 'Solo Singing',
+      category: 'Category A (Classical / Rabindra / Najrul)',
+      positions: [
+        { position: '1st', players: 'Nabaneet Das', department: 'Chemistry', points: 10 },
+        { position: '2nd', players: 'Nibedita Choudhury', department: 'Ecology & Environmental Science', points: 7 },
+        { position: '3rd', players: 'Sorbomita Chakraborty', department: 'Biotechnology', points: 5 },
+        { position: 'Participation', players: 'Sourav Choudhury', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Sahidur Barbhuiya', department: 'Ecology & Environmental Science', points: 1 },
+        { position: 'Participation', players: 'Susmita Chakraborty', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Rochoita Dey', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Mousam Ray', department: 'Education (B.Sc B.Ed)', points: 1 },
+        { position: 'Participation', players: 'Tarun Kumar Sinha', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Trishita Suklabaidya', department: 'Pharmaceutical Sciences', points: 1 },
+        { position: 'Participation', players: 'Riya Nath', department: 'Education (B.Sc B.Ed)', points: 1 },
+        { position: 'Participation', players: 'Smita Dutta', department: 'Computer Science', points: 1 },
+      ],
+    },
+    {
+      eventName: 'Solo Singing',
+      category: 'Category B (Modern / Folk)',
+      positions: [
+        { position: '1st', players: 'Nabaneet Das', department: 'Chemistry', points: 10 },
+        { position: '2nd', players: 'Subhangi Paul', department: 'Statistics', points: 7 },
+        { position: '3rd', players: 'Satarupa Sil', department: 'Statistics', points: 5 },
+        { position: 'Participation', players: 'Geetaraj Dutta', department: 'Chemistry', points: 1 },
+        { position: 'Participation', players: 'Supratim Barbhuiya', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Nibedita Choudhury', department: 'Ecology & Environmental Science', points: 1 },
+        { position: 'Participation', players: 'Sudipta Goswami', department: 'Biotechnology', points: 1 },
+        { position: 'Participation', players: 'Sumit Sarma', department: 'Biotechnology', points: 1 },
+        { position: 'Participation', players: 'Saptadeep Nath', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Mousam Ray', department: 'Education (B.Sc B.Ed)', points: 1 },
+        { position: 'Participation', players: 'Riya Nath', department: 'Education (B.Sc B.Ed)', points: 1 },
+        { position: 'Participation', players: 'Tarun Kumar Sinha', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Nomi Das', department: 'Pharmaceutical Sciences', points: 1 },
+        { position: 'Participation', players: 'Manabina Nath', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Shivanki Roy', department: 'Earth Science', points: 1 },
+        { position: 'Participation', players: 'Suraj Acharjee', department: 'Pharmaceutical Sciences', points: 1 },
+        { position: 'Participation', players: 'Susmita Suklabaidya', department: 'Computer Science', points: 1 },
+      ],
+    },
+    {
+      eventName: 'Solo Dancing',
+      category: 'Semi Classical',
+      positions: [
+        { position: '1st', players: 'Sukanya Dutta', department: 'Pharmaceutical Sciences', points: 10 },
+        { position: '2nd', players: 'Tonu Balmiki', department: 'Life Science & Bioinformatics', points: 7 },
+        { position: '3rd', players: 'Monoswini Chakravorty', department: 'Physics', points: 5 },
+        { position: 'Participation', players: 'Suchismita Sen', department: 'Biotechnology', points: 1 },
+        { position: 'Participation', players: 'Lipsha Pradhan', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Debadrita Kar', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Sahani Laskar', department: 'Microbiology', points: 1 },
+      ],
+    },
+    {
+      eventName: 'Solo Dancing',
+      category: 'Modern',
+      positions: [
+        { position: '1st', players: 'Dipshika Nath', department: 'Chemistry', points: 10 },
+        { position: '2nd', players: 'Nilanzana Upadhaya', department: 'Pharmaceutical Sciences', points: 7 },
+        { position: '3rd', players: 'Monashree Das', department: 'Computer Science', points: 5 },
+        { position: 'Participation', players: 'Brahma Jyoti Sinha', department: 'Biotechnology', points: 1 },
+        { position: 'Participation', players: 'M. Susmita Singha', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Soraisam Brinda Dzongri', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Sahidur Rohman Barbhuiya', department: 'Ecology & Environmental Science', points: 1 },
+      ],
+    },
+    {
+      eventName: 'Group Dance',
+      category: 'Department Teams',
+      positions: [
+        { position: '1st', players: 'Team', department: 'Chemistry', points: 15 },
+        { position: '2nd', players: 'Team', department: 'Pharmaceutical Sciences', points: 10 },
+        { position: '3rd', players: 'Team', department: 'Physics', points: 7 },
+        { position: 'Participation', players: 'Team', department: 'Mathematics', points: 2 },
+        { position: 'Participation', players: 'Team', department: 'Biotechnology', points: 2 },
+        { position: 'Participation', players: 'Team', department: 'Computer Science', points: 2 },
+        { position: 'Participation', players: 'Team', department: 'Life Science & Bioinformatics', points: 2 },
+      ],
+    },
+    {
+      eventName: 'Mr. & Miss Scientia 6.0',
+      category: 'Pageant',
+      positions: [
+        { position: 'Mr. — 1st', players: 'Brahma Jyoti Sinha', department: 'Biotechnology', points: 10 },
+        { position: 'Miss — 1st', players: 'Tanushree Roy', department: 'Life Science & Bioinformatics', points: 10 },
+        { position: 'Participation', players: 'Parishmita Gogoi (Miss)', department: 'Earth Science', points: 1 },
+        { position: 'Participation', players: 'Manabina Nath (Miss)', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Shayni Paul (Miss)', department: 'Computer Science', points: 1 },
+        { position: 'Participation', players: 'VSP Bobbie (Mr.)', department: 'Computer Science', points: 1 },
+        { position: 'Participation', players: 'Sagar Barman (Mr.)', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Hrishikesh Saikia (Mr.)', department: 'Chemistry', points: 1 },
+        { position: 'Participation', players: 'Rishab Ranjan Roy (Mr.)', department: 'Physics', points: 1 },
+      ],
+    },
+    {
+      eventName: 'Poster Presentation',
+      category: 'Individual Event',
+      positions: [
+        { position: '1st', players: 'Mriganka Das', department: 'Life Science & Bioinformatics', points: 10 },
+        { position: '2nd', players: 'Barsa Pal', department: 'Physics', points: 7 },
+        { position: '3rd', players: 'Dipika Nath', department: 'Chemistry', points: 5 },
+        { position: '3rd', players: 'Mahabrata Sengupta', department: 'Chemistry', points: 5 },
+        { position: 'Participation', players: 'Abhijit Mishra', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Anurag Das', department: 'Biotechnology', points: 1 },
+        { position: 'Participation', players: 'Niranjan Singha', department: 'Biotechnology', points: 1 },
+        { position: 'Participation', players: 'Yahasvi Raj', department: 'Computer Science', points: 1 },
+        { position: 'Participation', players: 'Shibasish Bhattacharjee', department: 'Computer Science', points: 1 },
+        { position: 'Participation', players: 'Binita Singha', department: 'Ecology & Environmental Science', points: 1 },
+        { position: 'Participation', players: 'Sahaj Begum', department: 'Ecology & Environmental Science', points: 1 },
+        { position: 'Participation', players: 'Nargis Khanam', department: 'Ecology & Environmental Science', points: 1 },
+        { position: 'Participation', players: 'Tanmayjit', department: 'Pharmaceutical Sciences', points: 1 },
+        { position: 'Participation', players: 'Saptadeep Nath', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Sabyasachi Roy', department: 'Physics', points: 1 },
+        { position: 'Participation', players: 'Afroza Hanam', department: 'Statistics', points: 1 },
+        { position: 'Participation', players: 'Anindita Krishna', department: 'Statistics', points: 1 },
+      ],
+    },
+    {
+      eventName: 'Oral Presentation',
+      category: 'Individual Event',
+      positions: [
+        { position: '1st', players: 'Tamim Ahmed', department: 'Life Science & Bioinformatics', points: 10 },
+        { position: '2nd', players: 'Juktamoni Gautam', department: 'Mathematics', points: 7 },
+        { position: '3rd', players: 'Pallavi Gupta', department: 'Biotechnology', points: 5 },
+        { position: 'Participation', players: 'Padmashree Rabha', department: 'Chemistry', points: 1 },
+        { position: 'Participation', players: 'Debajit Paul', department: 'Life Science & Bioinformatics', points: 1 },
+        { position: 'Participation', players: 'Premangini Basumatary', department: 'Ecology & Environmental Science', points: 1 },
+        { position: 'Participation', players: 'Bhaskarjyoti', department: 'Physics', points: 1 },
+      ],
+    },
+    {
+      eventName: 'Model Presentation',
+      category: 'Team Event (Group)',
+      positions: [
+        { position: '1st', players: 'Team', department: 'Life Science & Bioinformatics', points: 15 },
+        { position: '2nd', players: 'Team', department: 'Education (B.Sc B.Ed)', points: 10 },
+        { position: '3rd', players: 'Team', department: 'Biotechnology', points: 7 },
+        { position: 'Participation', players: 'Team', department: 'Computer Science', points: 2 },
+        { position: 'Participation', players: 'Team', department: 'Ecology & Environmental Science', points: 2 },
+        { position: 'Participation', players: 'Team', department: 'Physics', points: 2 },
+        { position: 'Participation', players: 'Team', department: 'Statistics', points: 2 },
+      ],
+    },
   ]
+
+  const priorityAcademicResults = eventResults.filter(
+    (r) => r.eventName === 'Poster Presentation' || r.eventName === 'Oral Presentation'
+  )
+  const otherEventResults = eventResults.filter(
+    (r) => r.eventName !== 'Poster Presentation' && r.eventName !== 'Oral Presentation'
+  )
 
   return (
     <div className="min-h-screen bg-slate-950 pt-24 md:pt-32">
@@ -712,7 +864,7 @@ const PointsTable = () => {
               <div className="px-6 py-4 border-b border-slate-700/50 bg-slate-800/30">
                 <h2 className="text-xl md:text-2xl font-bold text-white">Departments (Standings So Far)</h2>
                 <p className="text-sm text-slate-400 mt-0.5">
-                  Points are calculated from Badminton, Football, Cricket, Table Tennis, Volleyball, Chess, Carrom, Powerlifting, Tekken, NFS-MW, FIFA, eFootball, Relay Race, and MLBB results so far, using the Grading System.
+                  Points are calculated from Badminton, Football, Cricket, Table Tennis, Volleyball, Chess, Carrom, Powerlifting, Tekken, NFS-MW, FIFA, eFootball, Relay Race, MLBB, Solo Singing (Categories A and B), Solo Dancing (Semi Classical and Modern), Group Dance, Mr. and Miss Scientia 6.0, Poster Presentation, Oral Presentation, and Model Presentation results so far, using the Grading System.
                 </p>
               </div>
               <div className="overflow-x-auto">
@@ -744,21 +896,31 @@ const PointsTable = () => {
               <div className="px-6 py-4 border-b border-slate-700/50 bg-slate-800/30">
                 <h2 className="text-xl md:text-2xl font-bold text-white">Event Results</h2>
                 <p className="text-sm text-slate-400 mt-0.5">
-                  Event name, position, and player names — updated as results are declared
+                  Poster Presentation and Oral Presentation are shown first below. Participation rows are worth{' '}
+                  <span className="text-slate-300 font-medium">1 pt</span> each (Individual events) and are included in department totals. Other events follow under &quot;All other events&quot;.
                 </p>
               </div>
               <div className="p-4 md:p-6 space-y-8">
-                {eventResults.map((result, idx) => (
-                  <div key={idx}>
-                    <h3 className="text-lg font-semibold text-cyan-400 mb-3">
-                      {result.eventName} — {result.category}
-                    </h3>
-                    <div className="overflow-x-auto rounded-lg border border-slate-700/40">
+                {/* Poster & Oral presentation first — individual events; easy to find */}
+                {priorityAcademicResults.map((result, idx) => (
+                  <div
+                    key={`academic-${result.eventName}-${idx}`}
+                    className="rounded-xl border-2 border-emerald-500/50 bg-emerald-950/25 shadow-lg shadow-emerald-900/20"
+                  >
+                    <div className="px-4 py-3 border-b border-emerald-500/30 bg-emerald-900/20 md:px-5">
+                      <h3 className="text-lg font-bold text-emerald-300 md:text-xl">
+                        {result.eventName}
+                      </h3>
+                      <p className="text-sm text-emerald-200/80 mt-0.5">{result.category}</p>
+                    </div>
+                    <div className="overflow-x-auto p-4 md:p-5">
                       <table className="w-full text-left text-sm">
                         <thead>
                           <tr className="border-b border-slate-700/50 bg-slate-800/40">
                             <th className="px-4 py-2.5 font-semibold text-slate-300">Position</th>
-                            <th className="px-4 py-2.5 font-semibold text-slate-300">Players</th>
+                            <th className="px-4 py-2.5 font-semibold text-slate-300">
+                              {result.eventName === 'Poster Presentation' ? 'Presenters' : 'Name'}
+                            </th>
                             <th className="px-4 py-2.5 font-semibold text-slate-300">Department</th>
                             <th className="px-4 py-2.5 font-semibold text-slate-300 text-right w-20">Points</th>
                           </tr>
@@ -777,6 +939,43 @@ const PointsTable = () => {
                     </div>
                   </div>
                 ))}
+
+                <div className="pt-2">
+                  <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-4">
+                    All other events
+                  </h3>
+                  <div className="space-y-8">
+                    {otherEventResults.map((result, idx) => (
+                      <div key={idx}>
+                        <h3 className="text-lg font-semibold text-cyan-400 mb-3">
+                          {result.eventName} — {result.category}
+                        </h3>
+                        <div className="overflow-x-auto rounded-lg border border-slate-700/40">
+                          <table className="w-full text-left text-sm">
+                            <thead>
+                              <tr className="border-b border-slate-700/50 bg-slate-800/40">
+                                <th className="px-4 py-2.5 font-semibold text-slate-300">Position</th>
+                                <th className="px-4 py-2.5 font-semibold text-slate-300">Players</th>
+                                <th className="px-4 py-2.5 font-semibold text-slate-300">Department</th>
+                                <th className="px-4 py-2.5 font-semibold text-slate-300 text-right w-20">Points</th>
+                              </tr>
+                            </thead>
+                            <tbody className="text-slate-400">
+                              {result.positions.map((row, i) => (
+                                <tr key={i} className="border-b border-slate-700/30 last:border-0">
+                                  <td className="px-4 py-3 font-medium text-white">{row.position}</td>
+                                  <td className="px-4 py-3">{row.players}</td>
+                                  <td className="px-4 py-3">{row.department}</td>
+                                  <td className="px-4 py-3 text-right font-medium text-cyan-400">{row.points}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
