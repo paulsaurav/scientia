@@ -820,12 +820,18 @@ const PointsTable = () => {
     })).sort((a, b) => b.points - a.points)
   }, [])
 
-  const priorityAcademicResults = eventResults.filter(
-    (r) => r.eventName === 'Poster Presentation' || r.eventName === 'Oral Presentation'
-  )
-  const otherEventResults = eventResults.filter(
-    (r) => r.eventName !== 'Poster Presentation' && r.eventName !== 'Oral Presentation'
-  )
+  const topThreeDepartments = useMemo(() => departments.slice(0, 3), [departments])
+
+  /** Poster & Oral first (same order as before), then all other events — single UI for every event */
+  const orderedEventResults = useMemo(() => {
+    const posterOral = eventResults.filter(
+      (r) => r.eventName === 'Poster Presentation' || r.eventName === 'Oral Presentation'
+    )
+    const rest = eventResults.filter(
+      (r) => r.eventName !== 'Poster Presentation' && r.eventName !== 'Oral Presentation'
+    )
+    return [...posterOral, ...rest]
+  }, [])
 
   return (
     <div className="min-h-screen bg-slate-950 pt-24 md:pt-32">
@@ -837,7 +843,24 @@ const PointsTable = () => {
               Points Table
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">Quick reference for department standings and event results.</p>
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 md:mb-12">
+            Quick reference for department standings and event results.
+          </p>
+
+          <div className="max-w-md mx-auto pt-4 border-t border-slate-800/80 text-left">
+            <p className="text-sm text-slate-500 mb-4">Overall championship — top three right now</p>
+            <ul className="space-y-2.5">
+              {topThreeDepartments.map((row, i) => (
+                <li key={row.name} className="flex items-baseline justify-between gap-6 text-[15px]">
+                  <span className="text-slate-300 min-w-0">
+                    <span className="text-slate-600 tabular-nums mr-2">{i + 1}.</span>
+                    {row.name}
+                  </span>
+                  <span className="text-slate-500 tabular-nums shrink-0">{row.points}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -864,14 +887,12 @@ const PointsTable = () => {
                     </tr>
                   </thead>
                   <tbody className="text-slate-300">
-                    {[...departments]
-                      .sort((a, b) => b.points - a.points)
-                      .map((row, i) => (
-                        <tr key={i} className="border-b border-slate-700/30 last:border-0">
-                          <td className="px-6 py-4">{row.name}</td>
-                          <td className="px-6 py-4 text-right font-semibold text-white">{row.points}</td>
-                        </tr>
-                      ))}
+                    {departments.map((row, i) => (
+                      <tr key={i} className="border-b border-slate-700/30 last:border-0">
+                        <td className="px-6 py-4">{row.name}</td>
+                        <td className="px-6 py-4 text-right font-semibold text-white">{row.points}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -882,91 +903,53 @@ const PointsTable = () => {
               <div className="px-6 py-4 border-b border-slate-700/50 bg-slate-800/30">
                 <h2 className="text-xl md:text-2xl font-bold text-white">Event Results</h2>
                 <p className="text-sm text-slate-400 mt-0.5">
-                  Poster Presentation and Oral Presentation are shown first below. Department standings use placement points only (see{' '}
+                  Poster Presentation and Oral Presentation are listed first; all events use the same layout. Department standings use placement points only (see{' '}
                   <Link to="/grading-system" className="text-cyan-400/90 hover:text-cyan-300 font-medium transition-colors">
                     Grading System
                   </Link>
-                  ). Other events follow under &quot;All other events&quot;.
+                  ).
                 </p>
               </div>
               <div className="p-4 md:p-6 space-y-8">
-                {/* Poster & Oral presentation first — individual events; easy to find */}
-                {priorityAcademicResults.map((result, idx) => (
-                  <div
-                    key={`academic-${result.eventName}-${idx}`}
-                    className="rounded-xl border-2 border-emerald-500/50 bg-emerald-950/25 shadow-lg shadow-emerald-900/20"
-                  >
-                    <div className="px-4 py-3 border-b border-emerald-500/30 bg-emerald-900/20 md:px-5">
-                      <h3 className="text-lg font-bold text-emerald-300 md:text-xl">
-                        {result.eventName}
+                {orderedEventResults.map((result, idx) => {
+                  const playerHeader =
+                    result.eventName === 'Poster Presentation'
+                      ? 'Presenters'
+                      : result.eventName === 'Oral Presentation'
+                        ? 'Name'
+                        : 'Players'
+                  return (
+                    <div key={`${result.eventName}-${result.category}-${idx}`}>
+                      <h3 className="text-lg font-semibold text-cyan-400 mb-3">
+                        {result.category.trim() ? `${result.eventName} — ${result.category}` : result.eventName}
                       </h3>
-                      <p className="text-sm text-emerald-200/80 mt-0.5">{result.category}</p>
-                    </div>
-                    <div className="overflow-x-auto p-4 md:p-5">
-                      <table className="w-full text-left text-sm">
-                        <thead>
-                          <tr className="border-b border-slate-700/50 bg-slate-800/40">
-                            <th className="px-4 py-2.5 font-semibold text-slate-300">Position</th>
-                            <th className="px-4 py-2.5 font-semibold text-slate-300">
-                              {result.eventName === 'Poster Presentation' ? 'Presenters' : 'Name'}
-                            </th>
-                            <th className="px-4 py-2.5 font-semibold text-slate-300">Department</th>
-                            <th className="px-4 py-2.5 font-semibold text-slate-300 text-right w-20">Points</th>
-                          </tr>
-                        </thead>
-                        <tbody className="text-slate-400">
-                          {result.positions.map((row, i) => (
-                            <tr key={i} className="border-b border-slate-700/30 last:border-0">
-                              <td className="px-4 py-3 font-medium text-white">{row.position}</td>
-                              <td className="px-4 py-3">{row.players}</td>
-                              <td className="px-4 py-3">{row.department}</td>
-                              <td className="px-4 py-3 text-right font-medium text-cyan-400">{row.points}</td>
+                      <div className="overflow-x-auto rounded-lg border border-slate-700/40">
+                        <table className="w-full text-left text-sm">
+                          <thead>
+                            <tr className="border-b border-slate-700/50 bg-slate-800/40">
+                              <th className="px-4 py-2.5 font-semibold text-slate-300">Position</th>
+                              <th className="px-4 py-2.5 font-semibold text-slate-300">{playerHeader}</th>
+                              <th className="px-4 py-2.5 font-semibold text-slate-300">Department</th>
+                              <th className="px-4 py-2.5 font-semibold text-slate-300 text-right w-20">Points</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="pt-2">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-4">
-                    All other events
-                  </h3>
-                  <div className="space-y-8">
-                    {otherEventResults.map((result, idx) => (
-                      <div key={idx}>
-                        <h3 className="text-lg font-semibold text-cyan-400 mb-3">
-                          {result.category.trim() ? `${result.eventName} — ${result.category}` : result.eventName}
-                        </h3>
-                        <div className="overflow-x-auto rounded-lg border border-slate-700/40">
-                          <table className="w-full text-left text-sm">
-                            <thead>
-                              <tr className="border-b border-slate-700/50 bg-slate-800/40">
-                                <th className="px-4 py-2.5 font-semibold text-slate-300">Position</th>
-                                <th className="px-4 py-2.5 font-semibold text-slate-300">Players</th>
-                                <th className="px-4 py-2.5 font-semibold text-slate-300">Department</th>
-                                <th className="px-4 py-2.5 font-semibold text-slate-300 text-right w-20">Points</th>
+                          </thead>
+                          <tbody className="text-slate-400">
+                            {result.positions.map((row, i) => (
+                              <tr key={i} className="border-b border-slate-700/30 last:border-0">
+                                <td className="px-4 py-3 font-medium text-white">{row.position}</td>
+                                <td className="px-4 py-3">{row.players}</td>
+                                <td className="px-4 py-3">{row.department}</td>
+                                <td className="px-4 py-3 text-right font-medium text-cyan-400">
+                                  {row.position === 'Best Debater' ? '' : row.points}
+                                </td>
                               </tr>
-                            </thead>
-                            <tbody className="text-slate-400">
-                              {result.positions.map((row, i) => (
-                                <tr key={i} className="border-b border-slate-700/30 last:border-0">
-                                  <td className="px-4 py-3 font-medium text-white">{row.position}</td>
-                                  <td className="px-4 py-3">{row.players}</td>
-                                  <td className="px-4 py-3">{row.department}</td>
-                                  <td className="px-4 py-3 text-right font-medium text-cyan-400">
-                                    {row.position === 'Best Debater' ? '' : row.points}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
 
