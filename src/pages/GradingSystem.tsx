@@ -148,14 +148,10 @@ const GradingSystem = () => {
                   <tbody className="text-slate-300">
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">1st Place</td><td className="px-4 py-3 font-medium text-white">15</td></tr>
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">2nd Place</td><td className="px-4 py-3 font-medium text-white">10</td></tr>
-                    <tr className="border-b border-slate-700/30"><td className="px-4 py-3">3rd Place</td><td className="px-4 py-3 font-medium text-white">7</td></tr>
-                    <tr><td className="px-4 py-3">Participation (Played but no rank)</td><td className="px-4 py-3 font-medium text-white">2</td></tr>
+                    <tr><td className="px-4 py-3">3rd Place</td><td className="px-4 py-3 font-medium text-white">7</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p className="text-sm text-slate-400 italic">
-                Participation points will be awarded only to departments that officially compete in the event.
-              </p>
 
               <h3 className="text-xl md:text-2xl font-semibold text-slate-200 mt-8 mb-4">3.2 Individual Events Points Table (Singles and Doubles)</h3>
               <div className="overflow-x-auto rounded-xl border border-slate-700/50 mb-4">
@@ -169,14 +165,10 @@ const GradingSystem = () => {
                   <tbody className="text-slate-300">
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">1st Place</td><td className="px-4 py-3 font-medium text-white">10</td></tr>
                     <tr className="border-b border-slate-700/30"><td className="px-4 py-3">2nd Place</td><td className="px-4 py-3 font-medium text-white">7</td></tr>
-                    <tr className="border-b border-slate-700/30"><td className="px-4 py-3">3rd Place</td><td className="px-4 py-3 font-medium text-white">5</td></tr>
-                    <tr><td className="px-4 py-3">Participation (Played but no rank)</td><td className="px-4 py-3 font-medium text-white">1</td></tr>
+                    <tr><td className="px-4 py-3">3rd Place</td><td className="px-4 py-3 font-medium text-white">5</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p className="text-sm text-slate-400 italic">
-                Participation points will be awarded only to departments that officially compete in the event.
-              </p>
             </div>
 
             {/* 4. Doubles Event Rule */}
@@ -257,11 +249,16 @@ const GradingSystem = () => {
               <ul className="list-disc list-inside space-y-2 text-base md:text-lg ml-4">
                 <li>Using fixed point values for all departments</li>
                 <li>Separating team events and individual events appropriately</li>
-                <li>Rewarding both excellence (winners) and involvement (participation points)</li>
+                <li>Rewarding excellence through placement-based points</li>
                 <li>Applying the same rules and tie-breakers to all departments</li>
               </ul>
             </div>
           </div>
+
+          <p className="mt-12 md:mt-16 text-center text-sm md:text-base text-slate-500 leading-relaxed max-w-2xl mx-auto px-2">
+            These rules may be adjusted as circumstances require, with prior approval from the General Secretary and the
+            President.
+          </p>
         </div>
       </section>
     </div>
