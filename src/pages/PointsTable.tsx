@@ -376,7 +376,7 @@ const eventResults: EventResultBlock[] = [
         },
         {
           position: '2nd',
-          players: 'Matyaben Yasmin',
+          players: 'Mehjabin Yasmin',
           department: 'Chemistry',
           points: 7,
         },
@@ -406,7 +406,7 @@ const eventResults: EventResultBlock[] = [
         },
         {
           position: '3rd',
-          players: 'Matyaben Yasmin',
+          players: 'Mehjabin Yasmin',
           department: 'Chemistry',
           points: 5,
         },
