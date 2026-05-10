@@ -755,9 +755,24 @@ const eventResults: EventResultBlock[] = [
       eventName: 'Debate',
       category: '',
       positions: [
-        { position: '1st', players: '', department: 'Education (B.Sc B.Ed)', points: 10 },
-        { position: '2nd', players: '', department: 'Life Science & Bioinformatics', points: 7 },
-        { position: 'Best Debater', players: '', department: '', points: 0 },
+        {
+          position: '1st',
+          players: 'Segufta Yeasmin, Rosy Singha',
+          department: 'Education (B.Sc B.Ed)',
+          points: 10,
+        },
+        {
+          position: '2nd',
+          players: 'Ferdousi Zaman Laskar and Baibhav Choob',
+          department: 'Life Science & Bioinformatics',
+          points: 7,
+        },
+        {
+          position: 'Best Debater',
+          players: 'Segufta Yeasmin',
+          department: 'Education (B.Sc B.Ed)',
+          points: 10,
+        },
       ],
     },
     {
@@ -819,6 +834,26 @@ const PointsTable = () => {
       points: totals.get(name) ?? 0,
     })).sort((a, b) => b.points - a.points)
   }, [])
+
+  /** Sum of placement points in events (excl. Participation & rows with no dept) must equal sum of department totals (joint 3rd splits 7 across two depts). */
+  const departmentTotalsMatchEventPoints = useMemo(() => {
+    let raw = 0
+    for (const ev of eventResults) {
+      for (const row of ev.positions) {
+        if (row.position === 'Participation') continue
+        if (!row.department.trim()) continue
+        raw += row.points
+      }
+    }
+    const totals = aggregateDepartmentPoints(eventResults)
+    let agg = 0
+    for (const v of totals.values()) agg += v
+    return raw === agg
+  }, [])
+
+  if (import.meta.env.DEV && !departmentTotalsMatchEventPoints) {
+    console.warn('[PointsTable] Department totals do not match summed event points — check aggregateDepartmentPoints.')
+  }
 
   const topThreeDepartments = useMemo(() => departments.slice(0, 3), [departments])
 
@@ -939,9 +974,7 @@ const PointsTable = () => {
                                 <td className="px-4 py-3 font-medium text-white">{row.position}</td>
                                 <td className="px-4 py-3">{row.players}</td>
                                 <td className="px-4 py-3">{row.department}</td>
-                                <td className="px-4 py-3 text-right font-medium text-cyan-400">
-                                  {row.position === 'Best Debater' ? '' : row.points}
-                                </td>
+                                <td className="px-4 py-3 text-right font-medium text-cyan-400">{row.points}</td>
                               </tr>
                             ))}
                           </tbody>
